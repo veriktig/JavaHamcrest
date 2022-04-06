@@ -1,6 +1,7 @@
 package org.hamcrest.core;
 
 public class SampleBaseClass {
+
     String value;
 
     public SampleBaseClass(String value) {
@@ -21,4 +22,5 @@ public class SampleBaseClass {
     public int hashCode() {
       return value.hashCode();
     }
+
 }

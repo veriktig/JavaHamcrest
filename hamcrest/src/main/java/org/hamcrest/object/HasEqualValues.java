@@ -13,6 +13,7 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
+
     private final T expectedObject;
     private final List<FieldMatcher> fieldMatchers;
 
@@ -81,6 +82,5 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
             throw new AssertionError(format("IllegalAccess, reading field '%s' from %s", field.getName(), object));
         }
     }
-
 
 }

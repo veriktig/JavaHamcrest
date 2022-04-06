@@ -15,7 +15,10 @@ public class OrderingComparison {
      * For example:
      * <pre>assertThat(1, comparesEqualTo(1))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value the value which, when passed to the compareTo method of the examined object, should return zero
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().comparesEqualTo(value);
@@ -28,8 +31,11 @@ public class OrderingComparison {
      * For example:
      * <pre>assertThat(2, greaterThan(1))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value the value which, when passed to the compareTo method of the examined object, should return greater
      *              than zero
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThan(value);
@@ -42,8 +48,11 @@ public class OrderingComparison {
      * For example:
      * <pre>assertThat(1, greaterThanOrEqualTo(1))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value the value which, when passed to the compareTo method of the examined object, should return greater
      *              than or equal to zero
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThanOrEqualTo(value);
@@ -56,8 +65,11 @@ public class OrderingComparison {
      * For example:
      * <pre>assertThat(1, lessThan(2))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value the value which, when passed to the compareTo method of the examined object, should return less
      *              than zero
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThan(value);
@@ -70,10 +82,14 @@ public class OrderingComparison {
      * For example:
      * <pre>assertThat(1, lessThanOrEqualTo(1))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value the value which, when passed to the compareTo method of the examined object, should return less
      *              than or equal to zero
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThanOrEqualTo(value);
     }
+
 }

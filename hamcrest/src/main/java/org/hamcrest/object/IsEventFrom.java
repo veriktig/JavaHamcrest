@@ -6,11 +6,11 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.EventObject;
 
-
 /**
  * Tests if the value is an event announced by a specific object.
  */
 public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
+
     private final Class<?> eventClass;
     private final Object source;
 
@@ -25,7 +25,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
           mismatchDescription.appendText("item type was " + item.getClass().getName());
           return false;
         }
-        
+
         if (!eventHasSameSource(item)) {
           mismatchDescription.appendText("source was ").appendValue(item.getSource());
           return false;
@@ -33,7 +33,6 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
         return true;
     }
 
-    
     private boolean eventHasSameSource(EventObject ev) {
         return ev.getSource() == source;
     }
@@ -51,11 +50,12 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * derived from <var>eventClass</var> announced by <var>source</var>.
      * For example:
      * <pre>assertThat(myEvent, is(eventFrom(PropertyChangeEvent.class, myBean)))</pre>
-     * 
+     *
      * @param eventClass
      *     the class of the event to match on
      * @param source
      *     the source of the event
+     * @return The matcher.
      */
     public static Matcher<EventObject> eventFrom(Class<? extends EventObject> eventClass, Object source) {
         return new IsEventFrom(eventClass, source);
@@ -66,11 +66,13 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * announced by <var>source</var>.
      * For example:
      * <pre>assertThat(myEvent, is(eventFrom(myBean)))</pre>
-     * 
+     *
      * @param source
      *     the source of the event
+     * @return The matcher.
      */
     public static Matcher<EventObject> eventFrom(Object source) {
         return eventFrom(EventObject.class, source);
     }
+
 }

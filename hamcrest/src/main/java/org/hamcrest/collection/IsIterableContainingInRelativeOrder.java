@@ -73,9 +73,12 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * corresponding item in the specified items, in the same relative order
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder("b", "d"))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param items
      *     the items that must be contained within items provided by an examined {@link Iterable} in the same relative order
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(E... items) {
@@ -93,9 +96,12 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * matcher in the specified matchers, in the same relative order.
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder(equalTo("b"), equalTo("d")))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(Matcher<? super E>... itemMatchers) {
@@ -108,12 +114,16 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * matcher in the specified list of matchers, in the same relative order.
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), contains(Arrays.asList(equalTo("b"), equalTo("d"))))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the items provided by
      *     an examined {@link Iterable} in the same relative order
+     * @return The matcher.
      */
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInRelativeOrder<>(itemMatchers);
     }
+
 }

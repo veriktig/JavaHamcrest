@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that ends with a specific substring.
  */
 public class StringEndsWith extends SubstringMatcher {
+
     public StringEndsWith(String substring) { this(false, substring); }
 
     public StringEndsWith(boolean ignoringCase, String substring) { super("ending with", ignoringCase, substring); }
@@ -20,9 +21,10 @@ public class StringEndsWith extends SubstringMatcher {
      * {@link String}.
      * For example:
      * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-     * 
+     *
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
+     * @return The matcher.
      */
     public static Matcher<String> endsWith(String suffix) {
         return new StringEndsWith(false, suffix);
@@ -36,6 +38,7 @@ public class StringEndsWith extends SubstringMatcher {
      *
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
+     * @return The matcher.
      */
     public static Matcher<String> endsWithIgnoringCase(String suffix) {
         return new StringEndsWith(true, suffix);

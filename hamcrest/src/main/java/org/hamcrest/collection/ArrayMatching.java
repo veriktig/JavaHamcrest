@@ -16,7 +16,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
  */
 public class ArrayMatching {
 
-
   /**
    * Creates a matcher for arrays that matches when the examined array contains at least one item
    * that is matched by the specified <code>elementMatcher</code>.  Whilst matching, the traversal
@@ -24,8 +23,11 @@ public class ArrayMatching {
    * For example:
    * <pre>assertThat(new String[] {"foo", "bar"}, hasItemInArray(startsWith("ba")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
    * @param elementMatcher
    *     the matcher to apply to elements in examined arrays
+   * @return The matcher.
    */
   public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
       return new HasItemInArray<>(elementMatcher);
@@ -38,8 +40,11 @@ public class ArrayMatching {
    * instead of:
    * <pre>assertThat(hasItemInArray(equalTo(x)))</pre>
    *
+   * @param <T>
+   *     the matcher type.
    * @param element
    *     the element that should be present in examined arrays
+   * @return The matcher.
    */
   public static <T> Matcher<T[]> hasItemInArray(T element) {
     return hasItemInArray(equalTo(element));
@@ -62,8 +67,11 @@ public class ArrayMatching {
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an entry in an examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
@@ -87,8 +95,11 @@ public class ArrayMatching {
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an item provided by an examined array
+   * @return The matcher.
    */
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<? super E>> itemMatchers) {
     return new ArrayAsIterableMatcher<>(new IsIterableContainingInAnyOrder<>(itemMatchers), itemMatchers, "in any order");
@@ -109,8 +120,11 @@ public class ArrayMatching {
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, containsInAnyOrder("bar", "foo"))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must equal the entries of an examined array, in any order
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
@@ -124,8 +138,11 @@ public class ArrayMatching {
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, contains("foo", "bar"))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must equal the items within an examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(E... items) {
@@ -138,8 +155,11 @@ public class ArrayMatching {
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining(equalTo("foo"), equalTo("bar")))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers that must be satisfied by the items in the examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
@@ -157,8 +177,11 @@ public class ArrayMatching {
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
+   * @return The matcher.
    */
   public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
       return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
@@ -171,5 +194,5 @@ public class ArrayMatching {
     }
     return matchers;
   }
-}
 
+}

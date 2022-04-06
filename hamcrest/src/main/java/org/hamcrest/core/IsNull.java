@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
  * Is the value null?
  */
 public class IsNull<T> extends BaseMatcher<T> {
+
     @Override
     public boolean matches(Object o) {
         return o == null;
@@ -24,10 +25,11 @@ public class IsNull<T> extends BaseMatcher<T> {
      * Creates a matcher that matches if examined object is <code>null</code>.
      * For example:
      * <pre>assertThat(cheese, is(nullValue())</pre>
-     * 
+     *
+     * @return The matcher.
      */
     public static Matcher<Object> nullValue() {
-        return new IsNull<Object>();
+        return new IsNull<>();
     }
 
     /**
@@ -36,7 +38,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(notNullValue()))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(not(nullValue())))</pre>
-     * 
+     *
+     * @return The matcher.
      */
     public static Matcher<Object> notNullValue() {
         return not(nullValue());
@@ -47,12 +50,15 @@ public class IsNull<T> extends BaseMatcher<T> {
      * single dummy argument to facilitate type inference.
      * For example:
      * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
+     * @return The matcher.
      */
     public static <T> Matcher<T> nullValue(Class<T> type) {
-        return new IsNull<T>();
+        return new IsNull<>();
     }
 
     /**
@@ -62,13 +68,15 @@ public class IsNull<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
-     *  
+     * @return The matcher.
      */
     public static <T> Matcher<T> notNullValue(Class<T> type) {
         return not(nullValue(type));
     }
-}
 
+}

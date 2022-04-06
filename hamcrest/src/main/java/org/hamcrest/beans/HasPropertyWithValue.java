@@ -37,7 +37,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  *     return name;
  *   }
  * }</pre>
- * 
+ *
  * And that these person objects are generated within a piece of code under test
  * (a class named PersonGenerator). This object is sent to one of our mock objects
  * which overrides the PersonGenerationListener interface:
@@ -45,14 +45,14 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * public interface PersonGenerationListener {
  *   public void personGenerated(Person person);
  * }</pre>
- * 
+ *
  * In order to check that the code under test generates a person with name
  * "Iain" we would do the following:
  * <pre>
  * Mock personGenListenerMock = mock(PersonGenerationListener.class);
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
  * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
- * 
+ *
  * <p>If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
@@ -70,7 +70,8 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * @author cristcost at github
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
-    private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
+
+    private static final Condition.Step<PropertyDescriptor, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -135,7 +136,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<PropertyDescriptor,Method> withReadMethod() {
+    private static Condition.Step<PropertyDescriptor, Method> withReadMethod() {
         return new Condition.Step<PropertyDescriptor, java.lang.reflect.Method>() {
             @Override
             public Condition<Method> apply(PropertyDescriptor property, Description mismatch) {
@@ -154,11 +155,14 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * with the specified name whose value satisfies the specified matcher.
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param propertyName
      *     the name of the JavaBean property that examined beans should possess
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
         return new HasPropertyWithValue<>(propertyName, valueMatcher);
@@ -172,10 +176,13 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo.bar.baz", equalTo("a property value"))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param path
      *     the dot-separated path from the examined object to the JavaBean property
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasPropertyAtPath(String path, Matcher<T> valueMatcher) {
         List<String> properties = Arrays.asList(path.split("\\."));

@@ -8,37 +8,39 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class IsInTest extends AbstractMatcherTest {
+
     String[] elements = {"a", "b", "c"};
 
     @Override
     protected Matcher<?> createMatcher() {
-        return new IsIn<String>(elements);
+        return new IsIn<>(elements);
     }
 
     public void testReturnsTrueIfArgumentIsInCollection() {
         Collection<String> collection = Arrays.asList(elements);
-        Matcher<String> isIn = new IsIn<String>(collection);
-        
+        Matcher<String> isIn = new IsIn<>(collection);
+
         assertMatches("a", isIn, "a");
         assertMatches("b", isIn, "b");
         assertMatches("c", isIn, "c");
         assertDoesNotMatch("d", isIn, "d");
     }
-    
+
     public void testReturnsTrueIfArgumentIsInArray() {
-        Matcher<String> isIn = new IsIn<String>(elements);
-        
+        Matcher<String> isIn = new IsIn<>(elements);
+
         assertMatches("a", isIn, "a");
         assertMatches("b", isIn, "b");
         assertMatches("c", isIn, "c");
         assertDoesNotMatch("d", isIn, "d");
     }
-    
+
     public void testHasReadableDescription() {
-        Matcher<String> isIn = new IsIn<String>(elements);
-        
-        assertEquals("description", 
-            "one of {\"a\", \"b\", \"c\"}", 
+        Matcher<String> isIn = new IsIn<>(elements);
+
+        assertEquals("description",
+            "one of {\"a\", \"b\", \"c\"}",
             StringDescription.toString(isIn));
     }
+
 }

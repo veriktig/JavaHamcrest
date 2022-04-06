@@ -69,7 +69,6 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
         assertThat(0, integerComparatorMatcherBuilder.lessThan(1));
     }
 
-
     public void testComparesObjectsForEquality() {
         assertThat(3, integerComparatorMatcherBuilder.comparesEqualTo(3));
         assertThat("aa", stringComparatorMatcherBuilder.comparesEqualTo("aa"));
@@ -125,4 +124,5 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
             return value - other.value;
         }
     }
+
 }

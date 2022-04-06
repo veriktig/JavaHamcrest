@@ -6,12 +6,12 @@ import org.hamcrest.Matcher;
 
 import java.lang.reflect.Array;
 
-
 /**
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
 public class IsEqual<T> extends BaseMatcher<T> {
+
     private final Object expectedValue;
 
     public IsEqual(T equalArg) {
@@ -32,11 +32,11 @@ public class IsEqual<T> extends BaseMatcher<T> {
         if (actual == null) {
             return expected == null;
         }
-        
+
         if (expected != null && isArray(actual)) {
             return isArray(expected) && areArraysEqual(actual, expected);
         }
-        
+
         return actual.equals(expected);
     }
 
@@ -65,23 +65,28 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * Creates a matcher that matches when the examined object is logically equal to the specified
      * <code>operand</code>, as determined by calling the {@link java.lang.Object#equals} method on
      * the <b>examined</b> object.
-     * 
+     *
      * <p>If the specified operand is <code>null</code> then the created matcher will only match if
      * the examined object's <code>equals</code> method returns <code>true</code> when passed a
      * <code>null</code> (which would be a violation of the <code>equals</code> contract), unless the
      * examined object itself is <code>null</code>, in which case the matcher will return a positive
      * match.</p>
-     * 
+     *
      * <p>The created matcher provides a special behaviour when examining <code>Array</code>s, whereby
      * it will match if both the operand and the examined object are arrays of the same length and
      * contain items that are equal to each other (according to the above rules) <b>in the same
-     * indexes</b>.</p> 
+     * indexes</b>.</p>
      * For example:
      * <pre>
      * assertThat("foo", equalTo("foo"));
      * assertThat(new String[] {"foo", "bar"}, equalTo(new String[] {"foo", "bar"}));
      * </pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
+     * @param operand
+     *     the value to check.
+     * @return The matcher.
      */
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<>(operand);
@@ -90,8 +95,13 @@ public class IsEqual<T> extends BaseMatcher<T> {
     /**
      * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
      * compared to be of the same static type.
+     *
+     * @param operand
+     *     the value to check.
+     * @return The matcher.
      */
     public static Matcher<Object> equalToObject(Object operand) {
         return new IsEqual<>(operand);
     }
+
 }

@@ -1,4 +1,3 @@
-
 package org.hamcrest.text;
 
 import org.hamcrest.Description;
@@ -12,6 +11,7 @@ import static org.hamcrest.core.IsNull.nullValue;
  * Matches empty Strings (and null).
  */
 public final class IsEmptyString extends TypeSafeMatcher<String> {
+
     private static final IsEmptyString INSTANCE = new IsEmptyString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_EMPTY_INSTANCE = anyOf(nullValue(), INSTANCE);
@@ -32,8 +32,9 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
      * Creates a matcher of {@link String} that matches when the examined string has zero length.
      * For example:
      * <pre>assertThat("", isEmptyString())</pre>
-     * 
+     *
      * @deprecated use is(emptyString()) instead
+     * @return The matcher.
      */
     @Deprecated
     public static Matcher<String> isEmptyString() {
@@ -44,7 +45,8 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
      * Creates a matcher of {@link String} that matches when the examined string has zero length.
      * For example:
      * <pre>assertThat("", is(emptyString()))</pre>
-     * 
+     *
+     * @return The matcher.
      */
     public static Matcher<String> emptyString() {
         return INSTANCE;
@@ -55,9 +57,9 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
      * has zero length.
      * For example:
      * <pre>assertThat(((String)null), isEmptyOrNullString())</pre>
-     * 
+     *
      * @deprecated use is(emptyOrNullString()) instead
-     * 
+     * @return The matcher.
      */
     @Deprecated
     public static Matcher<String> isEmptyOrNullString() {
@@ -69,9 +71,11 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
      * has zero length.
      * For example:
      * <pre>assertThat(((String)null), is(emptyOrNullString()))</pre>
-     * 
+     *
+     * @return The matcher.
      */
     public static Matcher<String> emptyOrNullString() {
         return NULL_OR_EMPTY_INSTANCE;
     }
+
 }

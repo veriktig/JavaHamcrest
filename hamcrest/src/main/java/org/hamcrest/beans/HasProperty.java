@@ -45,12 +45,15 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
      * with the specified name.
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo"))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param propertyName
      *     the name of the JavaBean property that examined beans should possess
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasProperty(String propertyName) {
-        return new HasProperty<T>(propertyName);
+        return new HasProperty<>(propertyName);
     }
 
 }

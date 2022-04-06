@@ -4,8 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import static java.lang.Character.isWhitespace;
-
 /**
  * Tests if a string is equal to another string, compressing any changes in whitespace.
  */
@@ -23,16 +21,20 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
+    protected String getString() {
+        return string;
+    }
+
     @Override
     public boolean matchesSafely(String item) {
         return stripSpaces(string).equals(stripSpaces(item));
     }
-    
+
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
       mismatchDescription.appendText("was ").appendValue(item);
     }
-    
+
     @Override
     public void describeTo(Description description) {
         description.appendText("a string equal to ")
@@ -41,13 +43,14 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     public String stripSpaces(String toBeStripped) {
-        return toBeStripped.replaceAll("\\s+", " ").trim();
+        return toBeStripped.replaceAll("[\\p{Z}\\p{C}]+", " ").trim();
     }
 
     /**
      * @deprecated {@link #equalToCompressingWhiteSpace(String)}
      * @param expectedString
      *     the expected value of matched strings
+     * @return The matcher.
      */
     public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString);
@@ -66,6 +69,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      *
      * @param expectedString
      *     the expected value of matched strings
+     * @return The matcher.
      */
     public static Matcher<String> equalToCompressingWhiteSpace(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString);

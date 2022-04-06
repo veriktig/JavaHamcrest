@@ -10,7 +10,8 @@ import java.util.Map.Entry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
+public class IsMapContaining<K, V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
+
     private final Matcher<? super K> keyMatcher;
     private final Matcher<? super V> valueMatcher;
 
@@ -49,13 +50,18 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * value satisfies the specified <code>valueMatcher</code>.
      * For example:
      * <pre>assertThat(myMap, hasEntry(equalTo("bar"), equalTo("foo")))</pre>
-     * 
+     *
+     * @param <K>
+     *     the map key type.
+     * @param <V>
+     *     the map value type.
      * @param keyMatcher
      *     the key matcher that, in combination with the valueMatcher, must be satisfied by at least one entry
      * @param valueMatcher
      *     the value matcher that, in combination with the keyMatcher, must be satisfied by at least one entry
+     * @return The matcher.
      */
-    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+    public static <K, V> Matcher<Map<? extends K, ? extends V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
         return new IsMapContaining<>(keyMatcher, valueMatcher);
     }
 
@@ -65,24 +71,32 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * specified <code>value</code>.
      * For example:
      * <pre>assertThat(myMap, hasEntry("bar", "foo"))</pre>
-     *  
+     *
+     * @param <K>
+     *     the map key type.
+     * @param <V>
+     *     the map value type.
      * @param key
      *     the key that, in combination with the value, must be describe at least one entry
      * @param value
      *     the value that, in combination with the key, must be describe at least one entry
+     * @return The matcher.
      */
-    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
+    public static <K, V> Matcher<Map<? extends K, ? extends V>> hasEntry(K key, V value) {
         return new IsMapContaining<>(equalTo(key), equalTo(value));
     }
-    
+
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one key that satisfies the specified matcher.
      * For example:
      * <pre>assertThat(myMap, hasKey(equalTo("bar")))</pre>
-     * 
+     *
+     * @param <K>
+     *     the map key type.
      * @param keyMatcher
      *     the matcher that must be satisfied by at least one key
+     * @return The matcher.
      */
     public static <K> Matcher<Map<? extends K, ?>> hasKey(Matcher<? super K> keyMatcher) {
         return new IsMapContaining<>(keyMatcher, anything());
@@ -93,9 +107,12 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one key that is equal to the specified key.
      * For example:
      * <pre>assertThat(myMap, hasKey("bar"))</pre>
-     * 
+     *
+     * @param <K>
+     *     the map key type.
      * @param key
      *     the key that satisfying maps must contain
+     * @return The matcher.
      */
     public static <K> Matcher<Map<? extends K, ?>> hasKey(K key) {
         return new IsMapContaining<>(equalTo(key), anything());
@@ -106,9 +123,12 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one value that satisfies the specified valueMatcher.
      * For example:
      * <pre>assertThat(myMap, hasValue(equalTo("foo")))</pre>
-     * 
+     *
+     * @param <V>
+     *     the value type.
      * @param valueMatcher
      *     the matcher that must be satisfied by at least one value
+     * @return The matcher.
      */
     public static <V> Matcher<Map<?, ? extends V>> hasValue(Matcher<? super V> valueMatcher) {
         return new IsMapContaining<>(anything(), valueMatcher);
@@ -119,11 +139,15 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one value that is equal to the specified value.
      * For example:
      * <pre>assertThat(myMap, hasValue("foo"))</pre>
-     * 
+     *
+     * @param <V>
+     *     the value type.
      * @param value
      *     the value that satisfying maps must contain
+     * @return The matcher.
      */
     public static <V> Matcher<Map<?, ? extends V>> hasValue(V value) {
         return new IsMapContaining<>(anything(), equalTo(value));
     }
+
 }

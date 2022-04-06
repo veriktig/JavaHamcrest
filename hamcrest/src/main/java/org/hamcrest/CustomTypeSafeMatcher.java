@@ -1,6 +1,5 @@
 package org.hamcrest;
 
-
 /**
  * Utility class for writing one off matchers.
  * For example:
@@ -16,13 +15,13 @@ package org.hamcrest;
  * </pre>
  * This is a variant of {@link CustomMatcher} that first type checks
  * the argument being matched. By the time {@link TypeSafeMatcher#matchesSafely} is
- * is called the argument is guaranteed to be non-null and of the correct
- * type.
+ * called the argument is guaranteed to be non-null and of the correct type.
  *
  * @author Neil Dunn
  * @param <T> The type of object being matched
  */
 public abstract class CustomTypeSafeMatcher<T> extends TypeSafeMatcher<T> {
+
     private final String fixedDescription;
 
     public CustomTypeSafeMatcher(String description) {
@@ -36,4 +35,5 @@ public abstract class CustomTypeSafeMatcher<T> extends TypeSafeMatcher<T> {
     public final void describeTo(Description description) {
         description.appendText(fixedDescription);
     }
+
 }

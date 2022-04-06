@@ -4,7 +4,6 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-
 /**
  * A matcher that always returns <code>true</code>.
  */
@@ -32,6 +31,8 @@ public class IsAnything<T> extends BaseMatcher<T> {
 
     /**
      * Creates a matcher that always matches, regardless of the examined object.
+     *
+     * @return The matcher.
      */
     public static Matcher<Object> anything() { return new IsAnything<>(); }
 
@@ -41,8 +42,10 @@ public class IsAnything<T> extends BaseMatcher<T> {
      *
      * @param description
      *     a meaningful {@link String} used when describing itself
+     * @return The matcher.
      */
     public static Matcher<Object> anything(String description) {
         return new IsAnything<>(description);
     }
+
 }

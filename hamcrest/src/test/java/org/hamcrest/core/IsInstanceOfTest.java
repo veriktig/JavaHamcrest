@@ -61,9 +61,8 @@ public final class IsInstanceOfTest {
         Integer anInteger = with(any(Integer.class));
     }
 
-
     private static <T> T with(@SuppressWarnings("unused") Matcher<T> matcher) {
         return null;
     }
-}
 
+}

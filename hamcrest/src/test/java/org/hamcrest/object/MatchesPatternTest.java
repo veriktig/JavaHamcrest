@@ -10,6 +10,7 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.junit.Assert.assertThat;
 
 public class MatchesPatternTest {
+
     @Test
     public void copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = new MatchesPattern(Pattern.compile("."));
@@ -56,4 +57,5 @@ public class MatchesPatternTest {
         Matcher<?> m = MatchesPattern.matchesPattern("a[bc](d|e)");
         assertDescription("a string matching the pattern 'a[bc](d|e)'", m );
     }
+
 }

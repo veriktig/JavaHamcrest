@@ -14,10 +14,15 @@ import java.beans.PropertyDescriptor;
  * @since 1.1.0
  */
 public class PropertyUtil {
+
     /**
      * Returns the description of the property with the provided
      * name on the provided object's interface.
      *
+     * @param propertyName
+     *     the bean property name.
+     * @param fromObj
+     *     the object to check.
      * @return the descriptor of the property, or null if the property does not exist.
      * @throws IllegalArgumentException if there's a introspection failure
      */
@@ -33,7 +38,7 @@ public class PropertyUtil {
 
     /**
      * Returns all the property descriptors for the class associated with the given object
-     * 
+     *
      * @param fromObj Use the class of this object
      * @param stopClass Don't include any properties from this ancestor class upwards.
      * @return Property descriptors
@@ -48,4 +53,5 @@ public class PropertyUtil {
     }
 
     public static final Object[] NO_ARGUMENTS = new Object[0];
+
 }

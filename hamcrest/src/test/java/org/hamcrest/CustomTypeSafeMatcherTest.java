@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.AbstractMatcherTest.*;
 
 public final class CustomTypeSafeMatcherTest {
+
     private static final String STATIC_DESCRIPTION = "I match non empty strings";
 
     private final Matcher<String> customMatcher = new CustomTypeSafeMatcher<String>(STATIC_DESCRIPTION) {
@@ -33,9 +34,10 @@ public final class CustomTypeSafeMatcherTest {
     isNullSafe() {
         assertNullSafe(customMatcher);
     }
-    
+
     @Test public void
     copesWithUnknownTypes() {
         assertUnknownTypeSafe(customMatcher);
     }
+
 }

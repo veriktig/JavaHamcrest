@@ -18,22 +18,21 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSingletonMapContainingKey() {
-        Map<String,Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 1);
-        
+
         assertMatches("Matches single key", hasKey("a"), map);
     }
-    
+
     public void testMatchesMapContainingKey() {
-        Map<String,Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
-        
+
         assertMatches("Matches a", hasKey("a"), map);
         assertMatches("Matches c", hasKey("c"), map);
     }
-    
 
 //    No longer compiles
 //    public void testMatchesMapContainingKeyWithNoGenerics() {
@@ -47,7 +46,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
 //    }
 
     public void testMatchesMapContainingKeyWithIntegerKeys() throws Exception {
-        Map<Integer, String> map = new HashMap<Integer, String>();
+        Map<Integer, String> map = new HashMap<>();
         map.put(1, "A");
         map.put(2, "B");
 
@@ -55,7 +54,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
 
     public void testMatchesMapContainingKeyWithNumberKeys() throws Exception {
-        Map<Number, String> map = new HashMap<Number, String>();
+        Map<Number, String> map = new HashMap<>();
         map.put(1, "A");
         map.put(2, "B");
 
@@ -68,17 +67,18 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     public void testHasReadableDescription() {
         assertDescription("map containing [\"a\"->ANYTHING]", hasKey("a"));
     }
-    
+
     public void testDoesNotMatchEmptyMap() {
-        assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String,Integer>());
+        assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String, Integer>());
     }
-    
+
     public void testDoesNotMatchMapMissingKey() {
-        Map<String,Integer> map = new TreeMap<String, Integer>();
+        Map<String, Integer> map = new TreeMap<>();
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
-        
+
         assertMismatchDescription("map was [<a=1>, <b=2>, <c=3>]", hasKey("d"), map);
     }
+
 }

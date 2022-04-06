@@ -18,6 +18,10 @@ public class EasyMock2Adapter implements IArgumentMatcher {
      * Hamcrest {@link org.hamcrest.Matcher} to act as an
      * EasyMock {@link org.easymock.IArgumentMatcher} and
      * report it to EasyMock so it can be kept track of.
+     *
+     * @param matcher
+     *     the matcher to adapt to EasyMock constraint.
+     * @return The EasyMock matcher.
      */
     public static IArgumentMatcher adapt(Matcher<?> matcher) {
         EasyMock2Adapter easyMock2Matcher = new EasyMock2Adapter(matcher);
@@ -40,4 +44,5 @@ public class EasyMock2Adapter implements IArgumentMatcher {
     public void appendTo(StringBuffer buffer) {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
     }
+
 }

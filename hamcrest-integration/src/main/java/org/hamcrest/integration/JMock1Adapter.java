@@ -18,6 +18,10 @@ public class JMock1Adapter implements Constraint {
      * Convenience factory method that will adapt a
      * Hamcrest {@link org.hamcrest.Matcher} to act as an
      * jMock {@link org.jmock.core.Constraint}.
+     *
+     * @param matcher
+     *     the matcher to adapt to jMock constraint.
+     * @return The jMock constraint.
      */
     public static Constraint adapt(Matcher<?> matcher) {
         return new JMock1Adapter(matcher);
@@ -39,4 +43,5 @@ public class JMock1Adapter implements Constraint {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
         return buffer;
     }
+
 }

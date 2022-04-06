@@ -2,31 +2,39 @@ package org.hamcrest;
 
 import org.hamcrest.internal.ReflectiveTypeFinder;
 
-
 /**
  * Convenient base class for Matchers that require a non-null value of a specific type
  * and that will report why the received value has been rejected.
- * This implements the null check, checks the type and then casts. 
- * To use, implement <pre>matchesSafely()</pre>. 
+ * This implements the null check, checks the type and then casts.
+ * To use, implement <pre>matchesSafely()</pre>.
  *
  * @param <T>
+ *     the matcher type.
  * @author Neil Dunn
  * @author Nat Pryce
  * @author Steve Freeman
  */
 public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
-    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 2, 0); 
+
+    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 2, 0);
     private final Class<?> expectedType;
 
     /**
      * Subclasses should implement this. The item will already have been checked
      * for the specific type and will never be null.
+     *
+     * @param item
+     *     the item.
+     * @param mismatchDescription
+     *     the mismatch description.
+     * @return boolean true/false depending if item matches matcher.
      */
     protected abstract boolean matchesSafely(T item, Description mismatchDescription);
 
     /**
-     * Use this constructor if the subclass that implements <code>matchesSafely</code> 
-     * is <em>not</em> the class that binds &lt;T&gt; to a type. 
+     * Use this constructor if the subclass that implements <code>matchesSafely</code>
+     * is <em>not</em> the class that binds &lt;T&gt; to a type.
+     *
      * @param expectedType The expectedType of the actual value.
      */
     protected TypeSafeDiagnosingMatcher(Class<?> expectedType) {
@@ -34,19 +42,20 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Use this constructor if the subclass that implements <code>matchesSafely</code> 
-     * is <em>not</em> the class that binds &lt;T&gt; to a type. 
+     * Use this constructor if the subclass that implements <code>matchesSafely</code>
+     * is <em>not</em> the class that binds &lt;T&gt; to a type.
+     *
      * @param typeFinder A type finder to extract the type
      */
     protected TypeSafeDiagnosingMatcher(ReflectiveTypeFinder typeFinder) {
-      this.expectedType = typeFinder.findExpectedType(getClass()); 
+      this.expectedType = typeFinder.findExpectedType(getClass());
     }
 
     /**
      * The default constructor for simple sub types
      */
     protected TypeSafeDiagnosingMatcher() {
-      this(TYPE_FINDER); 
+      this(TYPE_FINDER);
     }
 
     @Override
@@ -71,4 +80,5 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
         matchesSafely((T) item, mismatchDescription);
       }
     }
+
 }

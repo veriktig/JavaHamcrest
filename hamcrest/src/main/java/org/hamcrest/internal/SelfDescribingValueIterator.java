@@ -5,12 +5,13 @@ import org.hamcrest.SelfDescribing;
 import java.util.Iterator;
 
 public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> {
+
     private Iterator<T> values;
-    
+
     public SelfDescribingValueIterator(Iterator<T> values) {
         this.values = values;
     }
-    
+
     @Override
     public boolean hasNext() {
         return values.hasNext();
@@ -25,4 +26,5 @@ public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> 
     public void remove() {
         values.remove();
     }
+
 }

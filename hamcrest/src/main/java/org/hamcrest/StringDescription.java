@@ -6,6 +6,7 @@ import java.io.IOException;
  * A {@link Description} that is stored as a string.
  */
 public class StringDescription extends BaseDescription {
+
     private final Appendable out;
 
     public StringDescription() {
@@ -15,12 +16,12 @@ public class StringDescription extends BaseDescription {
     public StringDescription(Appendable out) {
         this.out = out;
     }
-    
+
     /**
      * Return the description of a {@link SelfDescribing} object as a String.
-     * 
+     *
      * @param selfDescribing
-     *   The object to be described.
+     *    The object to be described.
      * @return
      *   The description of the object.
      */
@@ -30,6 +31,11 @@ public class StringDescription extends BaseDescription {
 
     /**
      * Alias for {@link #toString(SelfDescribing)}.
+     *
+     * @param selfDescribing
+     *    The object to be described.
+     * @return
+     *   The description of the object.
      */
     public static String asString(SelfDescribing selfDescribing) {
         return toString(selfDescribing);
@@ -52,7 +58,7 @@ public class StringDescription extends BaseDescription {
             throw new RuntimeException("Could not write description", e);
         }
     }
-    
+
     /**
      * Returns the description as a string.
      */
@@ -60,4 +66,5 @@ public class StringDescription extends BaseDescription {
     public String toString() {
         return out.toString();
     }
+
 }

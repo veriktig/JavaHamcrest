@@ -44,6 +44,12 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
      * For example:
      * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
+     *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     all the matchers must pass.
+     * @return The matcher.
      */
     public static <T> Matcher<T> allOf(Iterable<Matcher<? super T>> matchers) {
         return new AllOf<>(matchers);
@@ -53,9 +59,16 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
      * For example:
      * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
+     *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     all the matchers must pass.
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
         return allOf(Arrays.asList(matchers));
     }
+
 }

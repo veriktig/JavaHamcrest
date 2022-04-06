@@ -12,6 +12,7 @@ import static java.util.Collections.singletonList;
 import static org.hamcrest.collection.ArrayMatching.asEqualMatchers;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
+
     private final List<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
@@ -88,9 +89,12 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * must be of the same length as the number of specified items.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains("foo", "bar"))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
@@ -103,10 +107,13 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * For a positive match, the examined iterable must only yield one item.
      * For example:
      * <pre>assertThat(Arrays.asList("foo"), contains(equalTo("foo")))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher that must be satisfied by the single item provided by an
      *     examined {@link Iterable}
+     * @return The matcher.
      */
     @SuppressWarnings("unchecked")
     public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> itemMatcher) {
@@ -120,16 +127,19 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * must be of the same length as the number of specified matchers.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(equalTo("foo"), equalTo("bar")))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... itemMatchers) {
         // required for JDK 1.6
         //noinspection RedundantTypeArguments
         final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = NullSafety.<E>nullSafe(itemMatchers);
-    	return contains(nullSafeWithExplicitTypeMatchers);
+        return contains(nullSafeWithExplicitTypeMatchers);
     }
 
     /**
@@ -139,12 +149,16 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * must be of the same length as the specified list of matchers.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
-     * 
+     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item provided by
      *     an examined {@link Iterable}
+     * @return The matcher.
      */
     public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<>(itemMatchers);
     }
+
 }

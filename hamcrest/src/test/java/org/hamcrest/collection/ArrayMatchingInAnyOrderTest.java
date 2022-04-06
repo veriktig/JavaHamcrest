@@ -3,7 +3,6 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.collection.ArrayMatching.arrayContainingInAnyOrder;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ArrayMatchingInAnyOrderTest extends AbstractMatcherTest {
@@ -19,7 +18,7 @@ public class ArrayMatchingInAnyOrderTest extends AbstractMatcherTest {
         assertDescription("[<1>, <2>] in any order", ArrayMatching.arrayContainingInAnyOrder(equalTo(1), equalTo(2)));
         assertDescription("[<1>, <2>] in any order", ArrayMatching.arrayContainingInAnyOrder(1, 2));
     }
-    
+
     public void testMatchesItemsInAnyOrder() {
       assertMatches("in order", ArrayMatching.arrayContainingInAnyOrder(1, 2, 3), new Integer[] {1, 2, 3});
       assertMatches("out of order", ArrayMatching.arrayContainingInAnyOrder(1, 2, 3), new Integer[] {3, 2, 1});
@@ -40,4 +39,5 @@ public class ArrayMatchingInAnyOrderTest extends AbstractMatcherTest {
       assertMismatchDescription("no item matches: <2>, <3> in [<1>]", matcher, new Integer[] {1});
       assertMismatchDescription("not matched: <4>", matcher, new Integer[] {4,3,2,1});
     }
+
 }

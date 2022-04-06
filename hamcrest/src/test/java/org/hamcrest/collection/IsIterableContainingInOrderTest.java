@@ -5,7 +5,6 @@ import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -14,6 +13,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 @SuppressWarnings("unchecked")
 public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
+
     // temporary hack until the Java type system works
     private final Matcher<Iterable<? extends WithValue>> contains123 = contains(value(1), value(2), value(3));
 
@@ -53,9 +53,9 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("iterable containing [<1>, <2>]", contains(1, 2));
     }
-    
+
     public void testCanHandleNullMatchers() {
-    	assertMatches(contains(null, null), asList(null, null));
+        assertMatches(contains(null, null), asList(null, null));
     }
 
     public static class WithValue {
@@ -74,4 +74,5 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
         @Override protected Integer featureValueOf(WithValue actual) { return actual.getValue(); }
       };
     }
+
 }

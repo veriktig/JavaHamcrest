@@ -12,12 +12,13 @@ import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
+
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-    
+
     @Override
     protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
       final Matching<T> matching = new Matching<>(matchers, mismatchDescription);
@@ -26,10 +27,10 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
           return false;
         }
       }
-      
+
       return matching.isFinished(items);
     }
-    
+
     @Override
     public void describeTo(Description description) {
       description.appendText("iterable with items ")
@@ -45,7 +46,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         this.matchers = new ArrayList<>(matchers);
         this.mismatchDescription = mismatchDescription;
       }
-      
+
       public boolean matches(S item) {
         if (matchers.isEmpty()) {
           mismatchDescription.appendText("no match for: ").appendValue(item);
@@ -92,9 +93,12 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * For example:
      * </p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Matcher<? super T>... itemMatchers) {
@@ -117,9 +121,12 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * For example:
      * </p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder("bar", "foo"))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable} in any order
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(T... items) {
@@ -127,7 +134,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         for (T item : items) {
             matchers.add(equalTo(item));
         }
-        
+
         return new IsIterableContainingInAnyOrder<>(matchers);
     }
 
@@ -145,12 +152,15 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * </p>
      * <p>For example:</p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
         return new IsIterableContainingInAnyOrder<>(itemMatchers);
     }
-}
 
+}

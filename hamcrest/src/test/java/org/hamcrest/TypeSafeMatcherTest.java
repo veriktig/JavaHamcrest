@@ -7,6 +7,7 @@ import static org.junit.Assert.assertFalse;
 
 @SuppressWarnings("WeakerAccess")
 public final class TypeSafeMatcherTest {
+
     private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
 
     public static class TypeSafeMatcherSubclass extends TypeSafeMatcher<String> {
@@ -38,4 +39,5 @@ public final class TypeSafeMatcherTest {
       assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, 3);
       assertMismatchDescription("The mismatch", matcher, "a string");
     }
+
 }

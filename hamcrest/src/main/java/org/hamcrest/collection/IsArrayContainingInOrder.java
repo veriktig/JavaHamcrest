@@ -15,11 +15,12 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * @deprecated As of release 2.1, replaced by {@link ArrayMatching}.
  */
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
+
     private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 
     public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
+        this.iterableMatcher = new IsIterableContainingInOrder<>(matchers);
         this.matchers = matchers;
     }
 
@@ -27,7 +28,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     public boolean matchesSafely(E[] item) {
         return iterableMatcher.matches(asList(item));
     }
-    
+
     @Override
     public void describeMismatchSafely(E[] item, Description mismatchDescription) {
       iterableMatcher.describeMismatch(asList(item), mismatchDescription);
@@ -47,12 +48,14 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains("foo", "bar"))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(Object[])}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items within an examined array
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> arrayContaining(E... items) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
+        List<Matcher<? super E>> matchers = new ArrayList<>();
         for (E item : items) {
             matchers.add(equalTo(item));
         }
@@ -68,9 +71,11 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(equalTo("foo"), equalTo("bar")))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(Matcher[])}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers that must be satisfied by the items in the examined array
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
         return arrayContaining(asList(itemMatchers));
@@ -85,11 +90,14 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(List)}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
-        return new IsArrayContainingInOrder<E>(itemMatchers);
+        return new IsArrayContainingInOrder<>(itemMatchers);
     }
+
 }

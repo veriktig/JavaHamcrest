@@ -19,27 +19,27 @@ public class FileMatchersTest extends AbstractMatcherTest {
         directory = File.createTempFile("myDir", "");
         assertTrue("deleting " + directory, directory.delete());
         assertTrue("mkdir " + directory, directory.mkdirs());
-        
+
         file = new File(directory, "myFile");
         file.createNewFile();
     }
-    
+
     public void testAnExistingDirectory() {
         assertMatches("matches existing directory", FileMatchers.anExistingDirectory(), directory);
         assertDoesNotMatch("doesn't match existing file", FileMatchers.anExistingDirectory(), file);
-        assertDoesNotMatch("doesn't match missing file", FileMatchers.anExistingDirectory(), new File("foo"));
+        assertMismatchDescription("'foo' is not a directory", FileMatchers.anExistingDirectory(), new File("foo"));
     }
 
     public void testAnExistingFileOrDirectory() {
         assertMatches("matches existing file", FileMatchers.anExistingFileOrDirectory(), file);
         assertMatches("matches existing directory", FileMatchers.anExistingFileOrDirectory(), directory);
-        assertDoesNotMatch("doesn't match missing file", FileMatchers.anExistingFileOrDirectory(), new File("foo"));
+        assertMismatchDescription("'foo' does not exist", FileMatchers.anExistingFileOrDirectory(), new File("foo"));
     }
 
     public void testAnExistingFile() {
         assertMatches("matches existing file", FileMatchers.anExistingFile(), file);
         assertDoesNotMatch("doesn't match existing directory", FileMatchers.anExistingFile(), directory);
-        assertDoesNotMatch("doesn't match missing file", FileMatchers.anExistingFile(), new File("foo"));
+        assertMismatchDescription("'foo' is not a file", FileMatchers.anExistingFile(), new File("foo"));
     }
 
     public void testAReadableFile() { // Not all OSes will allow setting readability so have to be forgiving here.

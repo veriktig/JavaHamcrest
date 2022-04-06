@@ -22,7 +22,13 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
 
+/**
+ * TODO: Finish Class Level Documentation.
+ *
+ * @param <T> the type of matcher being combined.
+ */
 public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
+
   private final Matcher<? super T> matcher;
 
   public CombinableMatcher(Matcher<? super T> matcher) {
@@ -62,11 +68,17 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * Creates a matcher that matches when both of the specified matchers match the examined object.
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
+   *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and both must pass.
+   * @return The matcher.
    */
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
     return new CombinableBothMatcher<>(matcher);
   }
-  
+
   public static final class CombinableBothMatcher<X> {
     private final Matcher<? super X> first;
     public CombinableBothMatcher(Matcher<? super X> matcher) {
@@ -81,11 +93,17 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * Creates a matcher that matches when either of the specified matchers match the examined object.
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
+   *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and either must pass.
+   * @return The matcher.
    */
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
     return new CombinableEitherMatcher<>(matcher);
   }
-  
+
   public static final class CombinableEitherMatcher<X> {
     private final Matcher<? super X> first;
     public CombinableEitherMatcher(Matcher<? super X> matcher) {
@@ -95,4 +113,5 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
       return new CombinableMatcher<X>(first).or(other);
     }
   }
+
 }

@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.hamcrest.core;
 
 import java.util.regex.Pattern;
@@ -65,4 +62,5 @@ public class StringRegularExpression extends TypeSafeDiagnosingMatcher<String> {
   public static Matcher<String> matchesRegex(String regex) {
     return matchesRegex(Pattern.compile(regex));
   }
+
 }

@@ -6,12 +6,12 @@ import org.hamcrest.TypeSafeMatcher;
 
 import static java.lang.Math.abs;
 
-
 /**
  * Is the value a number equal to a value within some range of
  * acceptable error?
  */
 public class IsCloseTo extends TypeSafeMatcher<Double> {
+
     private final double delta;
     private final double value;
 
@@ -51,13 +51,15 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
      * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
      * For example:
      * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
-     * 
+     *
      * @param operand
      *     the expected value of matching doubles
      * @param error
      *     the delta (+/-) within which matches will be allowed
+     * @return The matcher.
      */
     public static Matcher<Double> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }
+
 }

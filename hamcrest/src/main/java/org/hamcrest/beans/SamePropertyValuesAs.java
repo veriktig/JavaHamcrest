@@ -14,6 +14,7 @@ import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
+
     private final T expectedBean;
     private final Set<String> propertyNames;
     private final List<PropertyMatcher> propertyMatchers;
@@ -45,7 +46,6 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
                     .appendValueList("[", ", ", "]", ignoredFields);
         }
     }
-
 
     private boolean isCompatibleType(Object actual, Description mismatchDescription) {
         if (expectedBean.getClass().isAssignableFrom(actual.getClass())) {
@@ -147,10 +147,13 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
      *
+     * @param <B>
+     *     the matcher type.
      * @param expectedBean
      *     the bean against which examined beans are compared
      * @param ignoredProperties
      *     do not check any of these named properties.
+     * @return The matcher.
      */
     public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {
         return new SamePropertyValuesAs<>(expectedBean, asList(ignoredProperties));

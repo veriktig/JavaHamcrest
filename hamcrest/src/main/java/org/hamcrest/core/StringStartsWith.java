@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that starts with a specific substring.
  */
 public class StringStartsWith extends SubstringMatcher {
+
     public StringStartsWith(String substring) { this(false, substring); }
 
     public StringStartsWith(boolean ignoringCase, String substring) { super("starting with", ignoringCase, substring); }
@@ -20,9 +21,10 @@ public class StringStartsWith extends SubstringMatcher {
      * </p>
      * For example:
      * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-     * 
+     *
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string
+     * @return The matcher.
      */
     public static Matcher<String> startsWith(String prefix) { return new StringStartsWith(false, prefix); }
 
@@ -36,6 +38,7 @@ public class StringStartsWith extends SubstringMatcher {
      *
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string
+     * @return The matcher.
      */
     public static Matcher<String> startsWithIgnoringCase(String prefix) { return new StringStartsWith(true, prefix); }
 

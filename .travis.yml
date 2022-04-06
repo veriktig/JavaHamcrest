@@ -1,5 +1,17 @@
 language: java
 
+os: linux
+
+# Need to select an older Ubuntu distribution that supports JDK7
+dist: trusty
+
+jdk:
+  - openjdk7
+  - oraclejdk8
+  - openjdk8
+  - openjdk11
+  - openjdk17
+
 # Workaround to using openjdk7 with Gradle due to security issue:
 # https://github.com/gradle/gradle/issues/2421
 before_install:
@@ -8,12 +20,6 @@ before_install:
 - sudo mv $BCPROV_FILENAME /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext
 - sudo perl -pi.bak -e 's/^(security\.provider\.)([0-9]+)/$1.($2+1)/ge' /etc/java-7-openjdk/security/java.security
 - echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/java-7-openjdk/security/java.security
-
-jdk:
-  - openjdk7
-  - oraclejdk8
-  - openjdk8
-  - oraclejdk9
 
 script:
   - ./gradlew clean build javadoc

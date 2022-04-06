@@ -41,7 +41,6 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
         assertThat(0, lessThan(1));
     }
 
-
     public void testComparesObjectsForEquality() {
       assertThat(3, comparesEqualTo(3));
       assertThat("aa", comparesEqualTo("aa"));
@@ -62,7 +61,7 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
       assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
       assertThat(new BigDecimal("2"), comparesEqualTo(new BigDecimal("2.000")));
     }
-    
+
     public void testComparesCustomTypesWhoseCompareToReturnsValuesGreaterThatOne() {
         assertThat(new CustomInt(5), lessThan(new CustomInt(10)));
     }
@@ -77,4 +76,5 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
             return value - other.value;
         }
     }
+
 }

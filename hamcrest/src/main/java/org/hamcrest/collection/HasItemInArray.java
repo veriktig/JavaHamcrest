@@ -12,6 +12,7 @@ import static java.util.Arrays.asList;
  * Matches if an array contains an item satisfying a nested matcher.
  */
 public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
+
     private final Matcher<? super T> elementMatcher;
     private final TypeSafeDiagnosingMatcher<Iterable<? super T>> collectionMatcher;
 
@@ -24,7 +25,7 @@ public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
     public boolean matchesSafely(T[] actual) {
         return collectionMatcher.matches(asList(actual));
     }
-    
+
     @Override
     public void describeMismatchSafely(T[] actual, Description mismatchDescription) {
         collectionMatcher.describeMismatch(asList(actual), mismatchDescription);

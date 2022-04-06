@@ -7,6 +7,7 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.junit.Assert.assertEquals;
 
 public final class FeatureMatcherTest {
+
     private final FeatureMatcher<Thingy, String> resultMatcher = resultMatcher();
 
     @Test public void
@@ -28,7 +29,7 @@ public final class FeatureMatcherTest {
     @Test public void
     doesNotThrowClassCastException() {
         resultMatcher.matches(new ShouldNotMatch());
-        StringDescription mismatchDescription = new StringDescription(); 
+        StringDescription mismatchDescription = new StringDescription();
         resultMatcher.describeMismatch(new ShouldNotMatch(), mismatchDescription);
         assertEquals("was ShouldNotMatch <ShouldNotMatch>", mismatchDescription.toString());
     }
@@ -54,7 +55,7 @@ public final class FeatureMatcherTest {
 
     public static class ShouldNotMatch {
         @Override public String toString() { return "ShouldNotMatch"; }
-    } 
+    }
 
     private static FeatureMatcher<Thingy, String> resultMatcher() {
         return new FeatureMatcher<Thingy, String>(new Match("bar"), "Thingy with result", "result") {

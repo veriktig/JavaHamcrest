@@ -33,7 +33,7 @@ public final class IsEqualTest {
     @Test public void
     canCompareNullValues() {
         final Matcher<Object> matcher = equalTo(null);
-        
+
         assertMatches(matcher, null);
         assertDoesNotMatch(matcher, 2);
         assertDoesNotMatch(matcher, "hi");
@@ -153,5 +153,5 @@ public final class IsEqualTest {
     returnsGoodDescriptionIfCreatedWithNullReference() {
         assertDescription("null", equalTo(null));
     }
-}
 
+}

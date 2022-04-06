@@ -30,7 +30,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
     public void describeMismatchSafely(String item, Description mismatchDescription) {
       mismatchDescription.appendText("was ").appendValue(item);
     }
-    
+
     @Override
     public void describeTo(Description description) {
         description.appendText("a string equal to ")
@@ -43,9 +43,10 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
      * the specified expectedString, ignoring case.
      * For example:
      * <pre>assertThat("Foo", equalToIgnoringCase("FOO"))</pre>
-     * 
+     *
      * @param expectedString
      *     the expected value of matched strings
+     * @return The matcher.
      */
     public static Matcher<String> equalToIgnoringCase(String expectedString) {
         return new IsEqualIgnoringCase(expectedString);

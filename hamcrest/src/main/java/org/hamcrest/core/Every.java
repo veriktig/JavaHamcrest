@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
+
     private final Matcher<? super T> matcher;
 
     public Every(Matcher<? super T> matcher) {
@@ -34,11 +35,15 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
      * <code>itemMatcher</code>.
      * For example:
      * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
-     * 
+     *
+     * @param <U>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher to apply to every item provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <U> Matcher<Iterable<? extends U>> everyItem(final Matcher<U> itemMatcher) {
         return new Every<>(itemMatcher);
     }
+
 }

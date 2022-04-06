@@ -30,18 +30,18 @@ when upgrading.
 ## The Hamcrest Jar
 
 All the base classes and standard matcher implementations are contained in a
-single jar file called `hamcrest-2.1.jar`.
+single jar file called `hamcrest-2.2.jar`.
 
 ### Using Hamcrest in a Gradle Project
 
-Add `"org.hamcrest:hamcrest:2.1"` to the dependencies section of your
+Add `"org.hamcrest:hamcrest:2.2"` to the dependencies section of your
 `build.gradle`, for example:
 
 ```gradle
 apply plugin: 'java'
 
 dependencies {
-    testImplementation 'org.hamcrest:hamcrest:2.1'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 ```
 
@@ -56,7 +56,7 @@ Add the following to the `<dependencies>` section in your `pom.xml`:
 <dependency>
     <groupId>org.hamcrest</groupId>
     <artifactId>hamcrest</artifactId>
-    <version>2.1</version>
+    <version>2.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -66,7 +66,7 @@ Add the following to the `<dependencies>` section in your `pom.xml`:
 You can download the jars directly from Maven Central. You can find the jars by searching Maven Central for groupId `org.hamcrest`
 using the following link:
 
-> [https://search.maven.org/search?q=g:org.hamcrest](https://search.maven.org/search?q=g:org.hamcrest) 
+> [https://search.maven.org/artifact/org.hamcrest/hamcrest](https://search.maven.org/artifact/org.hamcrest/hamcrest)
 
 ## Previous Versions of Hamcrest
 
@@ -115,9 +115,9 @@ directly declare a dependency upon these shim jars to force the upgrade.
 apply plugin: 'java'
 
 dependencies {
-    testImplementation 'org.hamcrest:hamcrest:2.1'
-    testImplementation 'org.hamcrest:hamcrest-library:2.1'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation 'junit:junit:4.13.2'
 }
 ```
 
@@ -132,19 +132,19 @@ dependencies, otherwise the older version will take precedence.
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest</artifactId>
-        <version>2.1</version>
+        <version>2.2</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-library</artifactId>
-        <version>2.1</version>
+        <version>2.2</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>4.13.2</version>
         <scope>test</scope>
     </dependency>
 </dependencies>

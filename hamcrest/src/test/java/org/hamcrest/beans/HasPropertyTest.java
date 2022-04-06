@@ -20,7 +20,7 @@ public final class HasPropertyTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<Object> matcher = hasProperty("irrelevant");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -45,4 +45,5 @@ public final class HasPropertyTest {
         assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
                                   hasProperty("aNonExistentProp"), bean);
     }
+
 }

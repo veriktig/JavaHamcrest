@@ -3,7 +3,7 @@ package org.hamcrest;
 /**
  * TODO(ngd): Document.
  *
- * @param <T>
+ * @param <T> the type of matcher being diagnosed.
  */
 public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
 
@@ -18,4 +18,5 @@ public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
     }
 
     protected abstract boolean matches(Object item, Description mismatchDescription);
+
 }

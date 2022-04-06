@@ -7,13 +7,12 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.hamcrest.core.IsSame.theInstance;
 
-
 public final class IsSameTest {
 
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = sameInstance("irrelevant");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -45,4 +44,5 @@ public final class IsSameTest {
     returnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
         assertDescription("sameInstance(null)", sameInstance(null));
     }
+
 }

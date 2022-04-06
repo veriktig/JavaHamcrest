@@ -11,6 +11,7 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+
     private final Matcher<? super T> elementMatcher;
 
     public IsIterableContaining(Matcher<? super T> elementMatcher) {
@@ -54,7 +55,6 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
             .appendDescriptionOf(elementMatcher);
     }
 
-    
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified
@@ -62,9 +62,12 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
         return new IsIterableContaining<>(itemMatcher);
@@ -77,9 +80,12 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
@@ -93,22 +99,25 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * the examined {@link Iterable} will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
         List<Matcher<? super Iterable<T>>> all = new ArrayList<>(itemMatchers.length);
-        
+
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
           all.add(new IsIterableContaining<>(elementMatcher));
         }
-        
+
         return allOf(all);
     }
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that matches when consecutive passes over the
      * examined {@link Iterable} yield at least one item that is equal to the corresponding
@@ -116,9 +125,12 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * examined {@link Iterable} will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(T... items) {
@@ -126,7 +138,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
         for (T item : items) {
             all.add(hasItem(item));
         }
-        
+
         return allOf(all);
     }
 

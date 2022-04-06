@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 
 public class IsCompatibleTypeTest extends AbstractMatcherTest {
+
     static class BaseClass {
     }
 
@@ -50,4 +51,5 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public void testHasReadableDescription() {
         assertDescription("type < java.lang.Runnable", typeCompatibleWith(Runnable.class));
     }
+
 }

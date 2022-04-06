@@ -9,6 +9,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 @Deprecated
 public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+
     private final IsIterableContaining<T> delegate;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
@@ -25,7 +26,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         delegate.describeTo(description);
     }
 
-    
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified
@@ -35,9 +35,12 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItem(Matcher)}.
-     * 
+     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
         return IsIterableContaining.hasItem(itemMatcher);
@@ -52,9 +55,11 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItem(Object)}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
@@ -70,15 +75,17 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItems(Matcher[])}}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
         return IsIterableContaining.hasItems(itemMatchers);
     }
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that matches when consecutive passes over the
      * examined {@link Iterable} yield at least one item that is equal to the corresponding
@@ -88,9 +95,11 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItems(Object[])}}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(T... items) {
