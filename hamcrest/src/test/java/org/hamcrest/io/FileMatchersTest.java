@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -16,10 +17,7 @@ public class FileMatchersTest extends AbstractMatcherTest {
 
     @Override
     protected void setUp() throws IOException {
-        directory = File.createTempFile("myDir", "");
-        assertTrue("deleting " + directory, directory.delete());
-        assertTrue("mkdir " + directory, directory.mkdirs());
-
+        directory = Files.createTempDirectory("myDir").toFile();
         file = new File(directory, "myFile");
         file.createNewFile();
     }
