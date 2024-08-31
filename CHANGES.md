@@ -1,6 +1,16 @@
 # Hamcrest Changes
 
-## Version 3.0-rc1 (24th July 2024)
+## Version 3.1 (Unreleased)
+
+### Improvements
+
+* Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
+
+### Bugfixes
+
+* TBD
+
+## Version 3.0 (1st August 2024)
 
 ### Breaking Changes
 

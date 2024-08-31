@@ -3,12 +3,26 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.optional.OptionalEmpty;
+import org.hamcrest.optional.OptionalWithValue;
 import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+/**
+ * Builder methods for various matchers.
+ * <p>
+ * <code>Matchers</code> provides syntactic sugar for building matchers, or
+ * chains of matchers. By using static imports on these methods, concise and
+ * readable code calling the matchers can be maintained.
+ * </p>
+ */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Matchers {
+
+  private Matchers() {
+  }
 
   /**
    * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
@@ -541,7 +555,7 @@ public class Matchers {
   /**
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
-   * the examined object.
+   * examined object.
    *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause
@@ -2173,4 +2187,45 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
+  /**
+   * Matcher that expects empty {@link Optional}.
+   *
+   * @param <T> type of optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> emptyOptional() {
+    return OptionalEmpty.emptyOptional();
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present.
+   *
+   * @param <T> type of optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue() {
+    return OptionalWithValue.optionalWithValue();
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present and is equal to <code>value</code>
+   *
+   * @param <T> type of optional value
+   * @param value to validate present optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue(T value) {
+    return OptionalWithValue.optionalWithValue(value);
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present and matches <code>matcher</code>
+   *
+   * @param <T> type of optional value
+   * @param matcher matcher to validate present optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue(Matcher<? super T> matcher) {
+    return OptionalWithValue.optionalWithValue(matcher);
+  }
 }
